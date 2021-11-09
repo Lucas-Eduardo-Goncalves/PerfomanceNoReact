@@ -1,4 +1,12 @@
 # Performace no React
+
+## Fluxo de Renderização
+O React possui um fluxo de renderização que sempre acontece caso aconteça alguma das coisas mostradas a cima.
+  1. Gerar uma nova versão do componente de todos os componentes envolvidos na renderização.
+  2. Comparar a nova versão com a versão do componente já salvo em cache.
+  3. Se houverem alterações, o React "renderiza" essa nova versão em tela mudando as partes necessárias.
+<br/>
+
 Existem 3 grandes coisas que tornam possiveis uma renderização de componentes no React que podem acabar causando uma lentidão no seu site, são elas:
 <br/>
 
@@ -59,13 +67,6 @@ export const Dashboard: React.FC = () => {
   );
 };
 ```
-<br/>
-
-# Fluxo de Renderização
-O React possui um fluxo de renderização que sempre acontece caso aconteça alguma das coisas mostradas a cima.
-  1. Gerar uma nova versão do componente de todos os componentes envolvidos na renderização.
-  2. Comparar a nova versão com a versão do componente já salvo em cache.
-  3. Se houverem alterações, o React "renderiza" essa nova versão em tela mudando as partes necessárias.
 <br/>
 
 # Hooks, Libs e boas praticas.
