@@ -40,7 +40,7 @@
 ## Hooks Para Melhorar o fluxo de renderização.
 
 - MEMO (importado do react)
-```
+```jsx
   1. Pure Functional Components
     Funções puras, que sempre retornam o mesmo resultado;
   
@@ -55,7 +55,7 @@
 ```
 
 - useMemo (importado do react) `memorizar um valor`
-```
+```jsx
   1. Cálculos pesados
   
   2. Igualdade referencial
@@ -63,6 +63,35 @@
 ```
 
 - useCallback (importado do react) `memorizar uma função`
-```
+```jsx
   1. Utilizado em caso de igualdade referencial
+```
+
+- dynamic / lazy (importado do next/dynamic ou importado do react) `carregamento preguiçoso`
+```jsx
+  1. Utilizado quando o componente só deve ser carregado com uma ação do usuario e não na build;
+    Exemplo: (next)
+
+    const AddProductToWishList = dynamic<AddProductToWishListProps>(() => {
+      return import('./AddProductToWishList').then(mod => mod.AddProductToWishList)
+    }, {
+      loading: () => <span>Carregando...</span>
+    })
+
+
+  2. Também é possivel utilizalo para que ele importe uma lib apenas no uso da função.
+    Exemplo:
+
+    async function showFomattedDate() {
+      const { format } = await import('date-fns');
+
+      format();
+    }
+```
+
+- virtualização `carregar uma lista muito grande que requer muito scroll aos poucos, conforme o usuário de scroll`
+```jsx
+  1. Utilizando a lib `react-virtualize`
+  
+
 ```
