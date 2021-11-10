@@ -1,19 +1,24 @@
 # Performace no React
+<br/>
 
-## Fluxo de Renderização
-O React possui um fluxo de renderização que sempre acontece caso aconteça alguma das coisas mostradas a cima.
-  1. Gerar uma nova versão do componente de todos os componentes envolvidos na renderização.
-  2. Comparar a nova versão com a versão do componente já salvo em cache.
-  3. Se houverem alterações, o React "renderiza" essa nova versão em tela mudando as partes necessárias.
+React é uma biblioteca JavaScript para construção de interfaces de usuário. 
+O React provê uma API declarativa, assim, você não precisa se preocupar em saber exatamente o que mudou em cada atualização utilizando a tecnica denominada como `Reconciliation` Ele utiliza um algoritmo de diffing para que as atualizações nos componentes sejam previsíveis e rápidas o suficiente para aplicações de alta performance. Isso torna mais fácil a criação de aplicações. <br/>
+Saiba tudo sobre React neste <a href="https://pt-br.reactjs.org/docs/getting-started.html">link</a>.
+
+Quando o React percebe que será necessario uma nova renderização ele irá:
+<!-- O React possui um fluxo de renderização que se baseia em: -->
+  1. Gerar uma nova versão do componente que precisa ser renderizado (uma nova representação da DOM do componente).
+  2. Comparar a nova versão com a versão anterior do componente já salvo na página.
+  3. Se houverem alterações, o React "renderiza" essa nova versão em tela (ele percebe aonde teve uma alteração e altera somente o que é necessário).
 <br/>
 
 Existem 3 grandes coisas que tornam possiveis uma renderização de componentes no React que podem acabar causando uma lentidão no seu site, são elas:
 <br/>
 
 ## Componente pai para um componente filho
-Se por algum motivo a nossa teg `<Container>` for renderizada novamente, o nosso `<h1>` também será, acabando em gerar uma renderização desnecessária. 
-```tsx
+Se por algum motivo a nossa componente `<Container>` tiver uma nova renderização, o nosso `<h1>` automaticamente também será recalculado, acabando em gerar uma renderização desnecessária. 
 
+```tsx
 import React from 'react';
 import { Container } from './styles';
 
@@ -28,15 +33,15 @@ export const Dashboard: React.FC = () => {
 <br/>
 
 ## Propriedade
-Quando o nosso propriedade `title` for atualizado, a teg `<h1>` será renderizada novamente.
+Quando o nosso componente `Title` tiver sua propriedade atualizada, o mesmo será renderizado novamente.
 ```tsx
 import React from 'react';
-import { Container } from './styles';
+import { Container, Heading } from './styles';
 
 export const Dashboard: React.FC = (title: string) => {
   return (
     <Container>
-      <h1>{title}</h1>
+      <Heading title={title}/>
       
       <p>
         Sou apenas um paragrafo
@@ -48,7 +53,7 @@ export const Dashboard: React.FC = (title: string) => {
 <br/>
 
 ## Hooks
-Sempre que um hook mudar sua informação no React, todo os componentes que utilizam o hook, serão renderizados novamente.
+Sempre que um hook mudar sua informação no React (hooks de informação, ex: useState/useContext/useReducer), todo os componentes que utilizam o hook, serão renderizados novamente.
 ```tsx
 import React, { useState } from 'react';
 import { Container } from './styles';
